@@ -1,4 +1,4 @@
-import React, { Key, useState } from "react";
+import React, { Key, useEffect, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import CardModal from "./CardModal";
 
@@ -18,8 +18,9 @@ export type CardProps = CardOwnProps &
 
 const Card = (props: CardOwnProps) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
-  const { image, name, experience, id, height, weight } = props;
-  const [isLiked, setIsLiked] = useState(false);
+  const { image, name, experience, id, height, weight, isLiked, toggleLiked } =
+    props;
+  const [liked, setIsLiked] = useState(false);
 
   const openModal = () => {
     setIsCardOpen(true);
@@ -27,10 +28,6 @@ const Card = (props: CardOwnProps) => {
 
   const closeModal = () => {
     setIsCardOpen(false);
-  };
-
-  const toggleLiked = () => {
-    setIsLiked((i) => !i);
   };
 
   return (
@@ -41,10 +38,10 @@ const Card = (props: CardOwnProps) => {
       >
         <img className="object-cover" src={image} alt={name} />
         <button
-          className=" absolute bottom-4 right-4 p-1 rounded-full grid place-items-center bg-black"
+          className="active:scale-110 transition-all absolute bottom-4 right-4 p-1 rounded-full grid place-items-center bg-black"
           onClick={(e) => {
             e.stopPropagation();
-            toggleLiked();
+            toggleLiked(name);
           }}
         >
           <HiOutlineHeart

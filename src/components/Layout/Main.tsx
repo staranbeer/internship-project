@@ -8,6 +8,28 @@ const Main = () => {
   const { pokemonList, isLoading } = useContext(PokemonContext);
   const [pokemons, setPokemons] = useState([]);
 
+  const [likedPokemon, setLikedPokemon] = useState<string[]>(
+    window.localStorage.getItem("likedPokemon") || []
+  );
+
+  const toggleLiked = (name: string) => {
+    if (likedPokemon.includes(name)) {
+      let filtered = likedPokemon.filter((pokemon) => pokemon !== name);
+      setLikedPokemon(filtered);
+      window.localStorage.setItem(
+        "likedPokemon",
+        JSON.stringify(likedPokemon.filter((pokemon) => pokemon !== name))
+      );
+    } else {
+      let newLikedPokemon = [...likedPokemon, name];
+      setLikedPokemon(newLikedPokemon);
+      window.localStorage.setItem(
+        "likedPokemon",
+        JSON.stringify(newLikedPokemon)
+      );
+    }
+  };
+
   const fetchMultiplePokemon = useCallback(async () => {
     const data = await getMultiplePokemon(pokemonList);
     setPokemons(data);
@@ -26,6 +48,8 @@ const Main = () => {
           {pokemons.map((pokemon: CardProps) => {
             return (
               <Card
+                toggleLiked={toggleLiked}
+                isLiked={likedPokemon.includes(pokemon.name)}
                 name={pokemon.name}
                 id={pokemon.id}
                 image={pokemon.image}

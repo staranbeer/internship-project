@@ -29,8 +29,8 @@ const CardModal = (props: CardModalProps) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="md:grid grid-cols-2 gap-8">
-        <div className=" min-w-[250px]  relative ">
+      <div className="md:grid  grid-cols-2 gap-8">
+        <div className=" min-w-[300px] md:min-w-full  relative ">
           <header className="items-center justify-between  flex mb-3">
             <h2 className="text-xl font-bold truncate text-ellipsis capitalize">
               {name}
@@ -54,9 +54,9 @@ const CardModal = (props: CardModalProps) => {
             />
           </div>
         </div>
-        <div className="flex-col flex">
-          <div className="font-bold capitalize">trivia</div>
-          <div className="mt-4  flex-col flex gap-2 flex-1">
+        <div className="flex-col gap-5 flex">
+          <div className="font-bold capitalize mt-5 md:mt-0">trivia</div>
+          <div className="md:mt-4  flex-col flex gap-2 flex-1">
             <div className="stat">
               height: <span className="stat-value">{height} ft</span>
             </div>
