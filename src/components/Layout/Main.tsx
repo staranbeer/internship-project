@@ -1,25 +1,44 @@
+import { useCallback, useContext, useEffect, useState } from "react";
+import PokemonContext from "../../context/PokemonContext";
+import { getMultiplePokemon } from "../../lib";
 import Card, { CardProps } from "../util/Card";
+import Loading from "../util/Loading";
 
-const Main = ({ data }: { data: CardProps[] }) => {
-  console.log(data);
+const Main = () => {
+  const { pokemonList, isLoading } = useContext(PokemonContext);
+  const [pokemons, setPokemons] = useState([]);
+
+  const fetchMultiplePokemon = useCallback(async () => {
+    const data = await getMultiplePokemon(pokemonList);
+    setPokemons(data);
+  }, [pokemonList]);
+
+  useEffect(() => {
+    fetchMultiplePokemon();
+  }, [fetchMultiplePokemon]);
+
   return (
     <main className="p-5 flex-1 bg-gray-100 lg:overflow-scroll">
-      <div className=" break-inside-avoid space-y-5 max-w-4xl mx-auto justify-center   gap-12 lg:columns-3  md:columns-2  columns-1">
-        {data.map((card: CardProps) => {
-          return (
-            <Card
-              id={card.id}
-              date={card.date}
-              key={card.id}
-              title={card.title}
-              image={card.image}
-              description={card.description}
-              photographer={card.photographer}
-              keywords={card.keywords}
-            />
-          );
-        })}
-      </div>
+      {isLoading || pokemons.length === 0 ? (
+        <Loading />
+      ) : (
+        <div className=" space-y-7 max-w-4xl mx-auto justify-center gap-12 lg:columns-3  md:columns-2  columns-1">
+          {pokemons.map((pokemon: CardProps) => {
+            return (
+              <Card
+                name={pokemon.name}
+                id={pokemon.id}
+                image={pokemon.image}
+                height={pokemon.height}
+                experience={pokemon.experience}
+                weight={pokemon.weight}
+                key={pokemon.id}
+                title={pokemon.name}
+              />
+            );
+          })}
+        </div>
+      )}
     </main>
   );
 };

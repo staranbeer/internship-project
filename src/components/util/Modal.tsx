@@ -2,11 +2,12 @@ import React, { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 export interface ModalProps {
+  isOpen: boolean;
   children?: ReactNode;
   onClose: () => void;
-  isOpen: boolean;
 }
 
+// the background for the modal
 const ModalBackdrop = ({ isOpen, onClose }: ModalProps) => {
   return (
     <div
@@ -18,12 +19,13 @@ const ModalBackdrop = ({ isOpen, onClose }: ModalProps) => {
   );
 };
 
+// the modal content
 const ModalContent = ({ children, isOpen, onClose }: ModalProps) => {
   return (
     <div
       className={`${
         isOpen ? "block" : "hidden"
-      }  bg-white p-5 rounded-lg z-50 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-lg`}
+      }  bg-white p-5  rounded-lg z-50 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-lg md:max-w-3xl md:w-[600px] `}
     >
       {children}
     </div>
