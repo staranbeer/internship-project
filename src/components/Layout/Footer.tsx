@@ -17,7 +17,6 @@ const Footer = () => {
     }
   };
 
-  console.log(next, pokemonList);
   return (
     <footer className="flex justify-center py-5 bg-gray-100">
       <div className="space-x-5">
