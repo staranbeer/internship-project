@@ -1,26 +1,12 @@
 import React, { Key, useEffect, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import CardModal from "./CardModal";
+import { CardProps } from "../../pokemon.types";
 
-interface CardOwnProps extends React.ComponentPropsWithoutRef<"article"> {
-  image: string;
-  id: string;
-  name: string;
-  abilities: string[];
-  height: string;
-  weight: string;
-  experience: string;
-  key?: Key | null | undefined;
-}
-
-export type CardProps = CardOwnProps &
-  Omit<React.ComponentPropsWithoutRef<"article">, keyof CardOwnProps>;
-
-const Card = (props: CardOwnProps) => {
+const Card = (props: CardProps) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const { image, name, experience, id, height, weight, isLiked, toggleLiked } =
     props;
-  const [liked, setIsLiked] = useState(false);
 
   const openModal = () => {
     setIsCardOpen(true);

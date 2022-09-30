@@ -16,5 +16,5 @@ export const useFetch = (searchQuery = "") => {
     setIsLoading(false);
   }, []);
 
-  return [pokemonList, isLoading, error];
+  return [pokemonList, isLoading, error, setPokemonList];
 };

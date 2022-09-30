@@ -1,6 +1,8 @@
+import { Pokemon } from "./pokemon.types";
+
 let URL = "https://pokeapi.co/api/v2/pokemon";
 
-const getSinglePokemon = async (name: string) => {
+const getSinglePokemon = async (name: string = "pikachu") => {
   let res = await fetch(`${URL}/${name}`);
   let data = await res.json();
 
@@ -16,7 +18,7 @@ const getSinglePokemon = async (name: string) => {
   return data;
 };
 
-const getMultiplePokemon = async (pokemonList) => {
+const getMultiplePokemon = async (pokemonList: Pokemon[]) => {
   let pokemonData = [];
 
   for (let pokemon of pokemonList) {

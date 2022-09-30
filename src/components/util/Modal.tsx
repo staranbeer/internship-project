@@ -1,11 +1,6 @@
 import React, { ReactNode } from "react";
 import { createPortal } from "react-dom";
-
-export interface ModalProps {
-  isOpen: boolean;
-  children?: ReactNode;
-  onClose: () => void;
-}
+import { ModalProps } from "../../pokemon.types";
 
 // the background for the modal
 const ModalBackdrop = ({ isOpen, onClose }: ModalProps) => {

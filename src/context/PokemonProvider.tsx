@@ -3,10 +3,12 @@ import { useFetch } from "../hooks/useFetch";
 import PokemonContext from "./PokemonContext";
 
 const PokemonProvider = ({ children }: { children: ReactNode }) => {
-  const [pokemonList, isLoading, error] = useFetch();
+  const [pokemonList, isLoading, error, setPokemonList] = useFetch();
 
   return (
-    <PokemonContext.Provider value={{ pokemonList, isLoading, error }}>
+    <PokemonContext.Provider
+      value={{ setPokemonList, pokemonList, isLoading, error }}
+    >
       {children}
     </PokemonContext.Provider>
   );

@@ -1,34 +1,15 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import PokemonContext from "../../context/PokemonContext";
 import { getMultiplePokemon } from "../../lib";
-import Card, { CardProps } from "../util/Card";
+import Card from "../util/Card";
 import Loading from "../util/Loading";
+import { Pokemon } from "../../pokemon.types";
+import PokemonContext from "../../context/PokemonContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const Main = () => {
   const { pokemonList, isLoading } = useContext(PokemonContext);
-  const [pokemons, setPokemons] = useState([]);
-
-  const [likedPokemon, setLikedPokemon] = useState<string[]>(
-    window.localStorage.getItem("likedPokemon") || []
-  );
-
-  const toggleLiked = (name: string) => {
-    if (likedPokemon.includes(name)) {
-      let filtered = likedPokemon.filter((pokemon) => pokemon !== name);
-      setLikedPokemon(filtered);
-      window.localStorage.setItem(
-        "likedPokemon",
-        JSON.stringify(likedPokemon.filter((pokemon) => pokemon !== name))
-      );
-    } else {
-      let newLikedPokemon = [...likedPokemon, name];
-      setLikedPokemon(newLikedPokemon);
-      window.localStorage.setItem(
-        "likedPokemon",
-        JSON.stringify(newLikedPokemon)
-      );
-    }
-  };
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [likedPokemon, setLikedPokemon] = useLocalStorage("likedPokemon");
 
   const fetchMultiplePokemon = useCallback(async () => {
     const data = await getMultiplePokemon(pokemonList);
@@ -39,13 +20,17 @@ const Main = () => {
     fetchMultiplePokemon();
   }, [fetchMultiplePokemon]);
 
+  const toggleLiked = (name: string) => {
+    setLikedPokemon(name);
+  };
+
   return (
     <main className="p-5 flex-1 bg-gray-100 lg:overflow-scroll">
       {isLoading || pokemons.length === 0 ? (
         <Loading />
       ) : (
         <div className=" space-y-7 max-w-4xl mx-auto justify-center gap-12 lg:columns-3  md:columns-2  columns-1">
-          {pokemons.map((pokemon: CardProps) => {
+          {pokemons.map((pokemon: Pokemon) => {
             return (
               <Card
                 toggleLiked={toggleLiked}
@@ -57,7 +42,6 @@ const Main = () => {
                 experience={pokemon.experience}
                 weight={pokemon.weight}
                 key={pokemon.id}
-                title={pokemon.name}
               />
             );
           })}
