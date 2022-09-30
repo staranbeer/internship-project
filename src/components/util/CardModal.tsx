@@ -36,6 +36,7 @@ const CardModal = (props: CardModalProps) => {
               <img src={image} className="w-full h-full object-cover " alt="" />
             </div>
             <button
+              aria-label="like pokemon"
               className="bg-white absolute bottom-4 right-4 p-1 rounded-full grid place-items-center border-2 border-black cursor-pointer"
               onClick={() => toggleLiked(name)}
             >

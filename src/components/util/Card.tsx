@@ -24,6 +24,7 @@ const Card = (props: CardProps) => {
       >
         <img className="object-cover" src={image} alt={name} />
         <button
+          aria-label="like pokemon"
           className="active:scale-110 transition-all absolute bottom-4 right-4 p-1 rounded-full grid place-items-center bg-black"
           onClick={(e) => {
             e.stopPropagation();
