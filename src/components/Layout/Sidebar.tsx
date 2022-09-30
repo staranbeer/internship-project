@@ -39,6 +39,10 @@ const Sidebar = () => {
     <>
       <div>
         <aside className="p-5  gap-4 flex flex-col max-w-lg lg:w-[450px] lg:border-r mx-auto">
+          <h2 className="font-bold flex gap-4">
+            <span>PokeSearch</span>
+            <img src="/favicon.ico" className="shrink-0" alt="site-logo" />
+          </h2>
           <form className=" flex flex-col  gap-3 mt-3" onSubmit={handleSubmit}>
             <input
               type="text"
