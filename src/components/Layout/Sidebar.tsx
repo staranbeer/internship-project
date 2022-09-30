@@ -53,7 +53,7 @@ const Sidebar = () => {
           </form>
           <div>
             <h1 className="Title text-2xl  font-serif font-medium mt-4">
-              Search for your favorite pokemons in one place !
+              Search for your favorite pokemons in one place!
             </h1>
             <div className="text-gray-600 ">
               <p className="py-5 md:block hidden ">
@@ -61,7 +61,7 @@ const Sidebar = () => {
                 pokemons and like their experiences so you can come back to them
                 later.
               </p>
-              <p>
+              <p className="mt-2">
                 Click on any of the cards to see more details about the pokemon.
               </p>
             </div>

@@ -25,7 +25,7 @@ const Main = () => {
   };
 
   return (
-    <main className="p-5 flex-1 bg-gray-100 lg:overflow-scroll">
+    <main className="p-5 bg-gray-100 ">
       {isLoading || pokemons.length === 0 ? (
         <Loading />
       ) : (
